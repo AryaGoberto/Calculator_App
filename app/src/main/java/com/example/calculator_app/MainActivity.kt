@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(mediumGray)
                         .padding(16.dp)
-                ) { }
+                )
             }
         }
     }
