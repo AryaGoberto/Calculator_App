@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,15 +40,21 @@ fun Calculator(
             verticalArrangement = Arrangement.spacedBy(buttonSpacing)
         ){
             Text(
-                text = state.number1 + (state.operation?:"") + state.number2,
+                text = buildString {
+                    append(state.number1)
+                    state.operation?.let { append(" ${it.symbol} ") }
+                    append(state.number2)
+                },
                 textAlign = TextAlign.End,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 32.dp),
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 24.dp, bottom = 16.dp),
                 fontWeight = FontWeight.Light,
-                fontSize = 80.sp,
+                fontSize = 48.sp, // dulunya 80.sp, dikurangi biar responsif
                 color = Color.White,
-                maxLines = 2
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
             Row(
                 modifier = Modifier.fillMaxWidth(),
